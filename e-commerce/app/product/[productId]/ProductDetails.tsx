@@ -9,6 +9,9 @@ import {
 } from "@/types/product";
 import { HorizontalLine } from "@/utils/horizontalLine";
 import SetColor from "@/app/components/products/SetColor";
+import SetQuantity from "@/app/components/products/SetQuantity";
+import Button from "@/app/components/Button";
+import ProductImage from "@/app/components/products/ProductImage";
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     const [cartProduct, setCartProduct] = useState<CartProductType>({
@@ -37,9 +40,29 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         [cartProduct.selectedImg]
     );
 
+    const handleQuantityIncrease = useCallback(() => {
+        if (cartProduct.quantity >= 99) return;
+
+        setCartProduct((prev) => {
+            return { ...prev, quantity: prev.quantity + 1 };
+        });
+    }, [cartProduct]);
+
+    const handleQuantityDecrease = useCallback(() => {
+        if (cartProduct.quantity <= 1) return;
+
+        setCartProduct((prev) => {
+            return { ...prev, quantity: prev.quantity - 1 };
+        });
+    }, [cartProduct]);
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>images</div>
+            <ProductImage
+                cartProduct={cartProduct}
+                product={product}
+                handleColorSelect={handleColorSelect}
+            />
             <div className="flex flex-col gap-2 text-slate-500 text-sm">
                 <h2 className="text-2xl font-medium text-slate-700">
                     {product.name}
@@ -73,9 +96,15 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                     handleColorSelect={handleColorSelect}
                 />
                 <HorizontalLine />
-                <div>quantity</div>
+                <SetQuantity
+                    cartProduct={cartProduct}
+                    handleQuantityIncrease={handleQuantityIncrease}
+                    handleQuantityDecrease={handleQuantityDecrease}
+                />
                 <HorizontalLine />
-                <div>add to cart</div>
+                <div className="max-w-[300px]">
+                    <Button label="Add to cart" onClick={() => {}} />
+                </div>
             </div>
         </div>
     );
