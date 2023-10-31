@@ -5,6 +5,7 @@ import { product } from "@/utils/product";
 import React from "react";
 import moment from "moment";
 import { Rating } from "@mui/material";
+import Avatar from "@/app/components/Avatar";
 
 interface ListRatingProps {
     product: any;
@@ -19,7 +20,7 @@ const ListRating: React.FC<ListRatingProps> = () => {
                     product.reviews.map((review: any) => (
                         <div key={review.id} className="max-w-[300px]">
                             <div className="flex gap-2 items-center">
-                                <div>Avatar</div>
+                                <Avatar src={review.user.image}/>
                                 <div className="font-semibold">
                                     {review?.user.name}
                                 </div>
