@@ -6,6 +6,7 @@ import React from "react";
 import { MdArrowBack } from "react-icons/md";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
+import ProductContent from "./ProductContent";
 
 const CartClient = () => {
     const { cartProducts } = useCart();
@@ -37,7 +38,7 @@ const CartClient = () => {
             </div>
             <div>
                 {cartProducts.map((product) => (
-                    <div key={product.id}>{product.name}</div>
+                    <ProductContent key={product.id} product={product} />
                 ))}
             </div>
             <div className="border-t-[1.5px] border-slate-300 py-4 flex justify-between gap-4">
