@@ -12,6 +12,7 @@ type CartContextType = {
     cartTotalQuantity: number;
     cartProducts: CartProductType[] | null;
     handleAddProductToCart: (product: CartProductType) => void;
+    handleRemoveProductFromCart: (product: CartProductType) => void;
 };
 
 interface Props {
@@ -42,17 +43,35 @@ export const CartContextProvider = (props: Props) => {
             } else {
                 updatedCart = [product];
             }
- 
+
             toast.success("Product added to cart");
             localStorage.setItem("eShopCartItems", JSON.stringify(updatedCart));
             return updatedCart;
         });
     }, []);
 
+    const handleRemoveProductFromCart = useCallback(
+        (product: CartProductType) => {
+            if (cartProducts) {
+                const updatedCart = cartProducts.filter((item) => {
+                    return item.id !== product.id;
+                });
+                setCartProducts(updatedCart);
+                toast.success("Product removed");
+                localStorage.setItem(
+                    "eShopCartItems",
+                    JSON.stringify(updatedCart)
+                );
+            }
+        },
+        [cartProducts]
+    );
+
     const value = {
         cartTotalQuantity,
         cartProducts,
         handleAddProductToCart,
+        handleRemoveProductFromCart,
     };
 
     return (
