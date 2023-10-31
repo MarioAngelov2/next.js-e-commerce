@@ -7,12 +7,15 @@ import Link from "next/link";
 import { truncateText } from "@/utils/truncateText";
 import Image from "next/image";
 import SetQuantity from "../components/products/SetQuantity";
+import { useCart } from "@/hooks/useCart";
 
 interface ProductContentProps {
     product: CartProductType;
 }
 
 const ProductContent: React.FC<ProductContentProps> = ({ product }) => {
+    const {handleRemoveProductFromCart} = useCart();
+
     return (
         <div
             className="grid grid-cols-5 text-xs md:text-sm gap-4 
@@ -36,7 +39,7 @@ const ProductContent: React.FC<ProductContentProps> = ({ product }) => {
                     <div>{product.selectedImg.color}</div>
                     <div className="w-[70px] ">
                         <button
-                            onClick={() => {}}
+                            onClick={() => handleRemoveProductFromCart(product)}
                             className="text-slate-500 underline"
                         >
                             Remove
