@@ -1,4 +1,5 @@
 import { CartProductType } from "@/types/product";
+import { toast } from "react-hot-toast";
 import {
     createContext,
     useCallback,
@@ -41,7 +42,8 @@ export const CartContextProvider = (props: Props) => {
             } else {
                 updatedCart = [product];
             }
-
+ 
+            toast.success("Product added to cart");
             localStorage.setItem("eShopCartItems", JSON.stringify(updatedCart));
             return updatedCart;
         });
