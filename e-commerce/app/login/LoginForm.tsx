@@ -16,7 +16,6 @@ const LoginForm = () => {
         formState: { errors },
     } = useForm<FieldValues>({
         defaultValues: {
-            name: "",
             email: "",
             password: "",
         },
