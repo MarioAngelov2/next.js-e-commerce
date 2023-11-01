@@ -9,7 +9,7 @@ import Button from "../components/Button";
 import ProductContent from "./ProductContent";
 
 const CartClient = () => {
-    const { cartProducts } = useCart();
+    const { cartProducts, handleClearCart } = useCart();
 
     if (!cartProducts || cartProducts.length === 0) {
         return (
@@ -47,7 +47,7 @@ const CartClient = () => {
                         label="Clear Cart"
                         small
                         outline
-                        onClick={() => {}}
+                        onClick={() => handleClearCart()}
                     />
                 </div>
                 <div className="text-sm flex flex-col gap-1 items-start">
