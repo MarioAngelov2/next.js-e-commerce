@@ -52,7 +52,7 @@ export const CartContextProvider = (props: Props) => {
                     total += itemTotal;
                     quantity += item.quantity;
                 }
-                
+
                 setCartTotalQuantity(quantity);
                 setCartTotalAmout(total);
             }
@@ -82,6 +82,7 @@ export const CartContextProvider = (props: Props) => {
                 const updatedCart = cartProducts.filter((item) => {
                     return item.id !== product.id;
                 });
+
                 setCartProducts(updatedCart);
                 toast.success("Product removed");
                 localStorage.setItem(
@@ -153,6 +154,7 @@ export const CartContextProvider = (props: Props) => {
 
     const handleClearCart = useCallback(() => {
         setCartProducts(null);
+        setCartTotalQuantity(0);
         localStorage.removeItem("eShopCartItems");
         toast.success("Cart cleared");
     }, [cartProducts]);
