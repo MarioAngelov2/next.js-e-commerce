@@ -13,6 +13,8 @@ type CartContextType = {
     cartProducts: CartProductType[] | null;
     handleAddProductToCart: (product: CartProductType) => void;
     handleRemoveProductFromCart: (product: CartProductType) => void;
+    handleCartQuantityIncrease: (product: CartProductType) => void;
+    handleCartQuantityDecrease: (product: CartProductType) => void;
 };
 
 interface Props {
@@ -44,10 +46,10 @@ export const CartContextProvider = (props: Props) => {
                 updatedCart = [product];
             }
 
-            toast.success("Product added to cart");
             localStorage.setItem("eShopCartItems", JSON.stringify(updatedCart));
             return updatedCart;
         });
+        toast.success("Product added to cart");
     }, []);
 
     const handleRemoveProductFromCart = useCallback(
@@ -67,11 +69,71 @@ export const CartContextProvider = (props: Props) => {
         [cartProducts]
     );
 
+    const handleCartQuantityIncrease = useCallback(
+        (product: CartProductType) => {
+            let updatedCart;
+
+            if (product.quantity === 99) {
+                return toast.error("Maximum quantity reached");
+            }
+
+            if (cartProducts) {
+                updatedCart = [...cartProducts];
+
+                const existingIndex = cartProducts.findIndex(
+                    (item) => item.id === product.id
+                );
+
+                if (existingIndex > -1) {
+                    updatedCart[existingIndex].quantity += 1;
+                }
+
+                setCartProducts(updatedCart);
+                localStorage.setItem(
+                    "eShopCartItems",
+                    JSON.stringify(updatedCart)
+                );
+            }
+        },
+        [cartProducts]
+    );
+
+    const handleCartQuantityDecrease = useCallback(
+        (product: CartProductType) => {
+            let updatedCart;
+
+            if (product.quantity === 1) {
+                return toast.error("Minimum quantity reached");
+            }
+
+            if (cartProducts) {
+                updatedCart = [...cartProducts];
+
+                const existingIndex = cartProducts.findIndex(
+                    (item) => item.id === product.id
+                );
+
+                if (existingIndex > -1) {
+                    updatedCart[existingIndex].quantity -= 1;
+                }
+
+                setCartProducts(updatedCart);
+                localStorage.setItem(
+                    "eShopCartItems",
+                    JSON.stringify(updatedCart)
+                );
+            }
+        },
+        [cartProducts]
+    );
+
     const value = {
         cartTotalQuantity,
         cartProducts,
         handleAddProductToCart,
         handleRemoveProductFromCart,
+        handleCartQuantityIncrease,
+        handleCartQuantityDecrease,
     };
 
     return (
