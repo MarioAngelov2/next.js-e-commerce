@@ -32,6 +32,7 @@ export const CartContextProvider = (props: Props) => {
     );
     const [cartTotalAmout, setCartTotalAmout] = useState<number>(0);
 
+    // Get cart items from localStorage
     useEffect(() => {
         const cartItems: any = localStorage.getItem("eShopCartItems");
         const parsedProducts: CartProductType[] | null = JSON.parse(cartItems);
@@ -39,20 +40,19 @@ export const CartContextProvider = (props: Props) => {
         setCartProducts(parsedProducts);
     }, []);
 
+    // Calculate total quantity and amount
     useEffect(() => {
         const getTotals = () => {
             if (cartProducts) {
-                const { total, quantity } = cartProducts?.reduce(
-                    (acc, item) => {
-                        const itemTotal = item.price * item.quantity;
+                let total = 0;
+                let quantity = 0;
 
-                        acc.total += itemTotal;
-                        acc.quantity += item.quantity;
-
-                        return acc;
-                    },
-                    { total: 0, quantity: 0 }
-                );
+                for (const item of cartProducts) {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    quantity += item.quantity;
+                }
+                
                 setCartTotalQuantity(quantity);
                 setCartTotalAmout(total);
             }
