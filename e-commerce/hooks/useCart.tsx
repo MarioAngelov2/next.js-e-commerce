@@ -16,6 +16,7 @@ type CartContextType = {
     handleCartQuantityIncrease: (product: CartProductType) => void;
     handleCartQuantityDecrease: (product: CartProductType) => void;
     handleClearCart: () => void;
+    cartTotalAmout: number;
 };
 
 interface Props {
@@ -29,6 +30,7 @@ export const CartContextProvider = (props: Props) => {
     const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(
         null
     );
+    const [cartTotalAmout, setCartTotalAmout] = useState<number>(0);
 
     useEffect(() => {
         const cartItems: any = localStorage.getItem("eShopCartItems");
@@ -36,6 +38,30 @@ export const CartContextProvider = (props: Props) => {
 
         setCartProducts(parsedProducts);
     }, []);
+
+    useEffect(() => {
+        const getTotals = () => {
+            if (cartProducts) {
+                const { total, quantity } = cartProducts?.reduce(
+                    (acc, item) => {
+                        const itemTotal = item.price * item.quantity;
+
+                        acc.total += itemTotal;
+                        acc.quantity += item.quantity;
+
+                        return acc;
+                    },
+                    { total: 0, quantity: 0 }
+                );
+                setCartTotalQuantity(quantity);
+                setCartTotalAmout(total);
+            }
+        };
+        getTotals();
+    }, [cartProducts]);
+
+    console.log('quantity', cartTotalQuantity)
+    console.log('amout', cartTotalAmout)
 
     const handleAddProductToCart = useCallback((product: CartProductType) => {
         setCartProducts((prev) => {
@@ -136,12 +162,13 @@ export const CartContextProvider = (props: Props) => {
 
     const value = {
         cartTotalQuantity,
+        cartTotalAmout,
         cartProducts,
         handleAddProductToCart,
         handleRemoveProductFromCart,
         handleCartQuantityIncrease,
         handleCartQuantityDecrease,
-        handleClearCart
+        handleClearCart,
     };
 
     return (
