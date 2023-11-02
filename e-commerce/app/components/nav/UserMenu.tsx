@@ -7,6 +7,7 @@ import Link from "next/link";
 import MenuItem from "./MenuItem";
 import { signOut } from "next-auth/react";
 import BackDrop from "./BackDrop";
+import toast from "react-hot-toast";
 
 const UserMenu = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -64,9 +65,7 @@ const UserMenu = () => {
                     </div>
                 )}
             </div>
-            {
-              isOpen ? <BackDrop onClick={toggleOpen}/> : null
-            }
+            {isOpen ? <BackDrop onClick={toggleOpen} /> : null}
         </>
     );
 };
