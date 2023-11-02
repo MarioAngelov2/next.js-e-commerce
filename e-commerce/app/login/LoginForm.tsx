@@ -7,8 +7,12 @@ import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
 import Button from "../components/Button";
 import Link from "next/link";
 import { AiOutlineGoogle } from "react-icons/ai";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const LoginForm = () => {
+    const router = useRouter();
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const {
         register,
@@ -23,12 +27,35 @@ const LoginForm = () => {
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true);
+
+        signIn("credentials", {
+            ...data,
+            callbackUrl: "/",
+        }).then((res) => {
+            setIsLoading(false);
+
+            if (res?.ok) {
+                router.push("/");
+                router.refresh();
+                toast.success("Logged in successfully");
+            }
+
+            if (res?.error) {
+                toast.error("Something went wrong. Please try again.");
+                console.log(res.error);
+            }
+        });
     };
 
     return (
         <>
             <Heading title="Login" />
-            <Button label="Continue with Google" outline onClick={() => {}} icon={AiOutlineGoogle} />
+            <Button
+                label="Continue with Google"
+                outline
+                onClick={() => {}}
+                icon={AiOutlineGoogle}
+            />
             <hr className="bg-slate-300 w-full h-px" />
             <Input
                 id="email"
