@@ -1,15 +1,17 @@
 import React from "react";
 import Container from "../components/Container";
-import Input from "../components/inputs/Input";
 import FormWrap from "../components/FormWrap";
 import RegisterForm from "./RegisterForm";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 
-const Register = () => {
+const Register = async () => {
+    const user = await getCurrentUser();
+
     return (
         <div>
             <Container>
                 <FormWrap>
-                    <RegisterForm />
+                    <RegisterForm user={user || null}/>
                 </FormWrap>
             </Container>
         </div>
