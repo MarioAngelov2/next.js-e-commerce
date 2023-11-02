@@ -27,7 +27,6 @@ export const options: NextAuthOptions = {
             },
 
             async authorize(credentials) {
-                console.log("works");
 
                 if (!credentials) {
                     throw new Error("Credentials are required");
@@ -55,8 +54,6 @@ export const options: NextAuthOptions = {
                 if (!isCorrectPassword) {
                     throw new Error("Invalid credentials");
                 }
-
-                console.log("User data", user);
 
                 return user;
             },
