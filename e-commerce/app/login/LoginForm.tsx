@@ -30,7 +30,7 @@ const LoginForm = () => {
 
         signIn("credentials", {
             ...data,
-            callbackUrl: "/",
+            redirect: false,
         }).then((res) => {
             setIsLoading(false);
 
@@ -41,7 +41,7 @@ const LoginForm = () => {
             }
 
             if (res?.error) {
-                toast.error("Something went wrong. Please try again.");
+                toast.error("Wrong email or password");
                 console.log(res.error);
             }
         });
