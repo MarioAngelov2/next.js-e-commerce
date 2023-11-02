@@ -1,11 +1,12 @@
-import NextAuth from "next-auth";
+import type { NextAuthOptions } from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/libs/prismadb";
 import bcrypt from "bcryptjs";
 
-export default NextAuth({
+export const options: NextAuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({
@@ -26,6 +27,8 @@ export default NextAuth({
             },
 
             async authorize(credentials) {
+                console.log("works");
+
                 if (!credentials) {
                     throw new Error("Credentials are required");
                 }
@@ -53,6 +56,8 @@ export default NextAuth({
                     throw new Error("Invalid credentials");
                 }
 
+                console.log("User data", user);
+
                 return user;
             },
         }),
@@ -65,4 +70,4 @@ export default NextAuth({
         strategy: "jwt",
     },
     secret: process.env.NEXTAUTH_SECRET,
-});
+};
