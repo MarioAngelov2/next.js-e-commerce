@@ -17,6 +17,8 @@ type CartContextType = {
     handleCartQuantityDecrease: (product: CartProductType) => void;
     handleClearCart: () => void;
     cartTotalAmout: number;
+    paymentIntent: string | null;
+    handleSetPaymentIntent: (value: string | null) => void;
 };
 
 interface Props {
@@ -27,17 +29,22 @@ export const CartContext = createContext<CartContextType | null>(null);
 
 export const CartContextProvider = (props: Props) => {
     const [cartTotalQuantity, setCartTotalQuantity] = useState(0);
+    const [cartTotalAmout, setCartTotalAmout] = useState<number>(0);
     const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(
         null
     );
-    const [cartTotalAmout, setCartTotalAmout] = useState<number>(0);
+    const [paymentIntent, setPaymentIntent] = useState<string | null>(null);
 
     // Get cart items from localStorage
     useEffect(() => {
         const cartItems: any = localStorage.getItem("eShopCartItems");
         const parsedProducts: CartProductType[] | null = JSON.parse(cartItems);
+        const eShopPaymentIntent: any =
+            localStorage.getItem("eShopPaymentIntent");
+        const paymentIntent = JSON.parse(eShopPaymentIntent);
 
         setCartProducts(parsedProducts);
+        setPaymentIntent(paymentIntent);
     }, []);
 
     // Calculate total quantity and amount
@@ -159,6 +166,14 @@ export const CartContextProvider = (props: Props) => {
         toast.success("Cart cleared");
     }, [cartProducts]);
 
+    const handleSetPaymentIntent = useCallback(
+        (value: string | null) => {
+            setPaymentIntent(value);
+            localStorage.setItem("eShopPaymentIntent", JSON.stringify(value));
+        },
+        [paymentIntent]
+    );
+
     const value = {
         cartTotalQuantity,
         cartTotalAmout,
@@ -168,6 +183,8 @@ export const CartContextProvider = (props: Props) => {
         handleCartQuantityIncrease,
         handleCartQuantityDecrease,
         handleClearCart,
+        paymentIntent,
+        handleSetPaymentIntent,
     };
 
     return (
