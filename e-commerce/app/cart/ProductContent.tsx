@@ -22,10 +22,10 @@ const ProductContent: React.FC<ProductContentProps> = ({ product }) => {
 
     return (
         <div
-            className="grid grid-cols-5 text-xs md:text-sm gap-4 
+            className="flex flex-wrap justify-between md:grid grid-cols-5 text-xs md:text-sm gap-4 
             border-t-[1.5px] border-slate-200 py-4 items-center"
         >
-            <div className="col-span-2 justify-self-start flex gap-2 md:gap-4">
+            <div className="col-span-2 justify-self-start flex w-full gap-2 md:gap-4">
                 <Link href={`/product/${product.id}`}>
                     <div className="relative w-[70px] aspect-square">
                         <Image
@@ -51,7 +51,7 @@ const ProductContent: React.FC<ProductContentProps> = ({ product }) => {
                     </div>
                 </div>
             </div>
-            <div className="justify-self-center">
+            <div className="hidden md:block justify-self-center">
                 {formatPrice(product.price)}
             </div>
             <div className="justify-self-center">
