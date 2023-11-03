@@ -38,27 +38,19 @@ const CartClient: React.FC<CartClientProps> = ({ currentUser }) => {
     return (
         <div>
             <Heading title="Shopping Cart" center />
-            <div className="grid grid-cols-5 text-xs gap-4 pb-2 items-center mt-8">
+            <div className="hidden md:grid grid-cols-5 text-xs gap-4 pb-2 items-center mt-12">
                 <div className="col-span-2 justify-self-start">PRODUCT</div>
                 <div className="justify-self-center">PRICE</div>
                 <div className="justify-self-center">QUANTITY</div>
                 <div className="justify-self-end">TOTAL</div>
             </div>
-            <div>
+            <div className="mt-8 md:mt-0">
                 {cartProducts.map((product) => (
                     <ProductContent key={product.id} product={product} />
                 ))}
             </div>
-            <div className="border-t-[1.5px] border-slate-300 py-4 flex justify-between gap-4">
-                <div className="w-[90px]">
-                    <Button
-                        label="Clear Cart"
-                        small
-                        outline
-                        onClick={() => handleClearCart()}
-                    />
-                </div>
-                <div className="text-sm flex flex-col gap-1 items-start">
+            <div className="border-t-[1.5px] border-slate-300 py-4 flex justify-end gap-4">
+                <div className="text-sm flex flex-col  gap-1 items-start">
                     <div className="flex justify-between w-full text-base font-semibold">
                         <span>Subtotal</span>
                         <span>{formatPrice(cartTotalAmout)}</span>
