@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
+import { useRouter } from "next/navigation";
 
 interface CheckoutFormProps {
     clientSecret: string;
@@ -28,6 +29,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
     const elements = useElements();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const formattedPrice = formatPrice(cartTotalAmout);
+    const router = useRouter();
 
     useEffect(() => {
         if (!stripe) {
@@ -63,10 +65,10 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                     handlePaymentSuccess(true);
                     handleSetPaymentIntent(null);
                 }
-
+                
                 setIsLoading(false);
             });
-    };
+        };
 
     return (
         <form onSubmit={handleSubmit} id="payment-form">
