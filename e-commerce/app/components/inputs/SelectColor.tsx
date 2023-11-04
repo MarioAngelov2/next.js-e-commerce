@@ -6,14 +6,14 @@ import SelectImage from "./SelectImage";
 import Button from "../Button";
 
 interface SelectColorProps {
-    item: ImageType;
+    imageData: ImageType;
     addImageToState: (value: ImageType) => void;
     removeImageFromState: (value: ImageType) => void;
     isProductCreated: boolean;
 }
 
 const SelectColor: React.FC<SelectColorProps> = ({
-    item,
+    imageData,
     addImageToState,
     removeImageFromState,
     isProductCreated,
@@ -30,7 +30,7 @@ const SelectColor: React.FC<SelectColorProps> = ({
 
     const handleFileChange = useCallback((value: File) => {
         setFile(value);
-        addImageToState({ ...item, image: value });
+        addImageToState({ ...imageData, image: value });
     }, []);
 
     const handleCheck = useCallback(
@@ -39,7 +39,7 @@ const SelectColor: React.FC<SelectColorProps> = ({
 
             if (!ev.target.checked) {
                 setFile(null);
-                removeImageFromState(item);
+                removeImageFromState(imageData);
             }
         },
         []
@@ -52,24 +52,24 @@ const SelectColor: React.FC<SelectColorProps> = ({
         >
             <div className="flex flex-row gap-2 items-center h-[60px]">
                 <input
-                    id={item.color}
+                    id={imageData.color}
                     type="checkbox"
                     checked={isSelected}
                     onChange={handleCheck}
                     className="cursor-pointer"
                 />
                 <label
-                    htmlFor={item.color}
+                    htmlFor={imageData.color}
                     className="font-medium cursor-pointer"
                 >
-                    {item.color}
+                    {imageData.color}
                 </label>
             </div>
             <>
                 {isSelected && !file && (
                     <div className="col-span-2 text-center">
                         <SelectImage
-                            item={item}
+                            item={imageData}
                             handleFileChange={handleFileChange}
                         />
                     </div>
@@ -84,7 +84,7 @@ const SelectColor: React.FC<SelectColorProps> = ({
                                 outline
                                 onClick={() => {
                                     setFile(null);
-                                    removeImageFromState(item);
+                                    removeImageFromState(imageData);
                                 }}
                             />
                         </div>

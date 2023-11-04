@@ -166,7 +166,7 @@ const AddProductForm = () => {
                     {colors.map((item, index) => (
                         <SelectColor
                             key={index}
-                            item={item}
+                            imageData={item}
                             addImageToState={addImageToState}
                             removeImageFromState={removeImageFromState}
                             isProductCreated={isProductCreated}
