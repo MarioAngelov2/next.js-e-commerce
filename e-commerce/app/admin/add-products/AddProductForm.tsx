@@ -7,11 +7,13 @@ import CustomCheckbox from "@/app/components/inputs/CustomCheckbox";
 import Input from "@/app/components/inputs/Input";
 import SelectColor from "@/app/components/inputs/SelectColor";
 import TextArea from "@/app/components/inputs/TextArea";
-import { ImageType } from "@/types/product";
+import { ImageType, UploadedImageType } from "@/types/product";
 import { categories } from "@/utils/categories";
 import { colors } from "@/utils/colors";
 import React, { useCallback, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { handleImageUploadsToFirebase } from "@/app/admin/add-products/FirebaseImgUpload";
 
 const AddProductForm = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -50,8 +52,38 @@ const AddProductForm = () => {
     }, [isProductCreated]);
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        console.log(data)
-    } 
+        setIsLoading(true);
+
+        let uploadedImages: UploadedImageType[] = [];
+
+        if (!data.category) {
+            setIsLoading(false);
+            return toast.error("Category is not selected");
+        }
+
+        if (!data.images || data.images.length === 0) {
+            setIsLoading(false);
+            return toast.error("No images uploaded");
+        }
+
+        // UPLOAD IMAGES TO FIREBASE STORAGE
+        const propsData = {
+            brand: data.brand,
+            category: data.category,
+            description: data.description,
+            images: data.images,
+            inStock: data.inStock,
+            name: data.name,
+            price: parseFloat(data.price),
+        };
+
+        await handleImageUploadsToFirebase(propsData, uploadedImages);
+
+        // SAVE PRODUCT TO DATABASE
+
+        const productData = { ...data, images: uploadedImages };
+        setIsLoading(false);
+    };
 
     const category = watch("category");
 
@@ -85,7 +117,6 @@ const AddProductForm = () => {
             return prev;
         });
     }, []);
-
 
     return (
         <>
@@ -174,7 +205,10 @@ const AddProductForm = () => {
                     ))}
                 </div>
             </div>
-            <Button label={isLoading ? 'Loading...' : "Add Product"} onClick={handleSubmit(onSubmit)}/>
+            <Button
+                label={isLoading ? "Loading..." : "Add Product"}
+                onClick={handleSubmit(onSubmit)}
+            />
         </>
     );
 };
