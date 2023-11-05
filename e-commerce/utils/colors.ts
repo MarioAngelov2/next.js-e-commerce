@@ -35,8 +35,8 @@ export const colors = [
         image: null,
     },
     {
-        color: "Space Grat",
-        colorCode: "#1D2951",
+        color: "Space Gray",
+        colorCode: "#5F5F60",
         image: null,
     },
 ];
