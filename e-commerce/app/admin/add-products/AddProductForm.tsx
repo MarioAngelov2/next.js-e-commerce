@@ -14,11 +14,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { handleImageUploadsToFirebase } from "@/app/admin/add-products/FirebaseImgUpload";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const AddProductForm = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [images, setImages] = useState<ImageType[] | null>();
     const [isProductCreated, setIsProductCreated] = useState<boolean>(false);
+    const router = useRouter();
 
     const {
         register,
@@ -78,11 +81,25 @@ const AddProductForm = () => {
         };
 
         await handleImageUploadsToFirebase(propsData, uploadedImages);
+        setIsLoading(false);
 
         // SAVE PRODUCT TO DATABASE
-
         const productData = { ...data, images: uploadedImages };
-        setIsLoading(false);
+
+        axios
+            .post("/api/product", productData)
+            .then(() => {
+                toast.success("Product created successfully");
+                setIsProductCreated(true);
+                router.refresh();
+            })
+            .catch((error) => {
+                toast.error("Something went wrong");
+                console.log(error);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     };
 
     const category = watch("category");
