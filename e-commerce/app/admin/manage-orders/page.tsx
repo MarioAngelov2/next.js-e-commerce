@@ -19,10 +19,8 @@ const ManageProducts = async () => {
     }
 
     return (
-        <div>
-            <Container>
-                <ManageOrdersClient orders={orders} />
-            </Container>
+        <div className="max-w-[1280px] mx-auto xl:px-20 md:px-2 px-4">
+            <ManageOrdersClient orders={orders} />
         </div>
     );
 };

@@ -14,10 +14,8 @@ const ManageProducts = async () => {
     }
 
     return (
-        <div>
-            <Container>
-                <ManageProductsClient products={products}/>
-            </Container>
+        <div className="max-w-[1280px] mx-auto xl:px-20 md:px-2 px-4">
+            <ManageProductsClient products={products} />
         </div>
     );
 };
