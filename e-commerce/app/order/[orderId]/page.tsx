@@ -9,7 +9,7 @@ interface IParams {
     orderId?: string;
 }
 
-const Order = async ({ params }: { params: IParams }) => {
+const Orders = async ({ params }: { params: IParams }) => {
     const order = await getOrderById(params);
 
     if (!order) {
@@ -25,4 +25,4 @@ const Order = async ({ params }: { params: IParams }) => {
     );
 };
 
-export default Order;
+export default Orders;
