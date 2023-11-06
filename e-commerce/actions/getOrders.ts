@@ -10,5 +10,7 @@ export async function getOrders() {
         });
 
         return orders;
-    } catch (error) {}
+    } catch (error) {
+        console.log(error);
+    }
 }
