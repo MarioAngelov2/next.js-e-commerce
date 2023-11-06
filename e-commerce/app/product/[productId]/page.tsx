@@ -2,14 +2,19 @@ import Container from "@/app/components/Container";
 import React from "react";
 import ProductDetails from "./ProductDetails";
 import ListRating from "./ListRating";
-import { products } from "@/utils/products";
+import getProductById from "@/actions/getProductById";
+import NullData from "@/app/components/NullData";
 
 interface Params {
     productId?: string;
 }
 
-const ProductId = ({ params }: { params: Params }) => {
-    const product = products.find((product) => product.id === params.productId)
+const ProductId = async ({ params }: { params: Params }) => {
+    const product = await getProductById(params);
+
+    if (!product) {
+        return <NullData title="Something went wrong. Try again later."/>
+    }
 
     return (
         <div className="p-8">
