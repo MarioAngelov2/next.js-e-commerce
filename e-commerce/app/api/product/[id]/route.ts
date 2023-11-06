@@ -8,10 +8,16 @@ export async function DELETE(
 ) {
     const user = await getCurrentUser();
 
-    if (!user || user.role !== "ADMIN") {
-        return NextResponse.error();
+    if (!user) {
+        return NextResponse.json(
+            { message: "User not found" },
+            { status: 404 }
+        );
     }
 
+    if (user.role !== "ADMIN") {
+        return NextResponse.error();
+    }
     const product = await prisma.product.delete({
         where: { id: params.id },
     });

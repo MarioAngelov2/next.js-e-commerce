@@ -5,7 +5,14 @@ import { getCurrentUser } from "@/actions/getCurrentUser";
 export async function PUT(request: Request) {
     const user = await getCurrentUser();
 
-    if (!user || user.role !== "ADMIN") {
+    if (!user) {
+        return NextResponse.json(
+            { message: "User not found" },
+            { status: 404 }
+        );
+    }
+
+    if (user.role !== "ADMIN") {
         return NextResponse.error();
     }
 
