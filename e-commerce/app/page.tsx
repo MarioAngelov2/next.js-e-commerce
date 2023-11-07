@@ -14,7 +14,9 @@ export default async function Home({ searchParams }: HomeProps) {
 
     if (products.length === 0) {
         return (
-            <NullData title="Something went wrong. Please refresh the page or try again later." />
+            <NullData
+                title={`No products found. Click "All" to clear filters`}
+            />
         );
     }
 
@@ -28,7 +30,7 @@ export default async function Home({ searchParams }: HomeProps) {
         return array;
     };
 
-    const shuffleProducts = shuffleArrayProducts(products)
+    const shuffleProducts = shuffleArrayProducts(products);
 
     return (
         <div className="p-8">
