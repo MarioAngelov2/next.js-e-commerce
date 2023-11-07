@@ -4,6 +4,7 @@ import Link from "next/link";
 import CartCount from "./CartCount";
 import UserMenu from "./UserMenu";
 import { getCurrentUser } from "@/actions/getCurrentUser";
+import CategoriesBar from "./CategoriesBar";
 
 const Navbar = async () => {
 
@@ -23,6 +24,7 @@ const Navbar = async () => {
                     </div>
                 </Container>
             </div>
+            <CategoriesBar />
         </div>
     );
 };
