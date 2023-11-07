@@ -8,6 +8,7 @@ import MenuItem from "./MenuItem";
 import { signOut } from "next-auth/react";
 import BackDrop from "./BackDrop";
 import { LoggedInUser } from "@/types";
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
     user: LoggedInUser | null;
@@ -15,6 +16,7 @@ interface UserMenuProps {
 
 const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const router = useRouter();
 
     const toggleOpen = useCallback(() => {
         setIsOpen((prev) => !prev);
@@ -53,6 +55,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
                                     onClick={() => {
                                         toggleOpen();
                                         signOut();
+                                        router.push("/");
                                     }}
                                 >
                                     Logout
