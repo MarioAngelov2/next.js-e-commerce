@@ -13,9 +13,6 @@ const CategoriesBar = () => {
 
     const isMainPage = pathName === "/";
 
-    console.log(params.toString())
-    console.log(category)
-
     if (!isMainPage) {
         return null;
     }
