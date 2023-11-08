@@ -18,7 +18,7 @@ const Footer = () => {
                         <Link href="#">Laptops</Link>
                         <Link href="#">Desktops</Link>
                         <Link href="#">Watches</Link>
-                        <Link href="#">TV's</Link>
+                        <Link href="#">TVs</Link>
                         <Link href="#">Accessories</Link>
                     </FooterList>
                     <FooterList>
@@ -27,7 +27,7 @@ const Footer = () => {
                         </h3>
                         <Link href="#">Contact us</Link>
                         <Link href="#">Shipping Policy</Link>
-                        <Link href="#">Return & Exchanges</Link>
+                        <Link href="#">Return and Exchanges</Link>
                         <Link href="#">Watches</Link>
                         <Link href="#">FAQs</Link>
                     </FooterList>
