@@ -40,7 +40,7 @@ const OrderItem: React.FC<OrderItemProps> = ({ item }) => {
 
             <div className="flex items-center gap-1 md:justify-self-end font-semibold">
                 <div className="md:hidden">Total:</div>
-                <div>{(item.price * item.quantity).toFixed(2)}</div>
+                <div>{formatPrice(item.price * item.quantity)}</div>
             </div>
         </div>
     );

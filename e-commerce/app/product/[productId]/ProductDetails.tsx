@@ -83,7 +83,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                 product={product}
                 handleColorSelect={handleColorSelect}
             />
-            <div className="flex flex-col gap-2 text-slate-500 text-sm">
+            <div className="flex flex-col gap-2 text-slate-500 text-sm md:text-base">
                 <h2 className="text-2xl font-medium text-slate-700">
                     {product.name}
                 </h2>
@@ -95,11 +95,15 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                 <div className="text-justify">{product.description}</div>
                 <HorizontalLine />
                 <div>
-                    <span className="font-semibold">CATEGORY:</span>
+                    <span className="font-semibold">PRICE: </span>
+                    ${product.price.toLocaleString("en-US")}
+                </div>
+                <div>
+                    <span className="font-semibold">CATEGORY: </span>
                     {product.category}
                 </div>
                 <div>
-                    <span className="font-semibold">BRAND:</span>
+                    <span className="font-semibold">BRAND: </span>
                     {product.brand}
                 </div>
                 <div

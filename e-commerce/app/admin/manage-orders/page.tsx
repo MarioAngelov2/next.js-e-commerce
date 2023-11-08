@@ -4,7 +4,7 @@ import getProducts from "@/actions/getProducts";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import NullData from "@/app/components/NullData";
 import ManageOrdersClient from "./ManageOrdersClient";
-import { getOrders } from "@/actions/getOrders";
+import getOrders from "@/actions/getOrders";
 
 const ManageProducts = async () => {
     const orders = await getOrders();
