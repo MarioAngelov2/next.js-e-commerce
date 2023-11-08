@@ -20,8 +20,6 @@
     "@stripe/react-stripe-js": "^2.3.1",
     "@stripe/stripe-js": "^2.1.11",
     "@types/node": "20.8.9",
-    "@types/react": "18.2.33",
-    "@types/react-dom": "18.2.14",
     "autoprefixer": "10.4.16",
     "axios": "^1.6.0",
     "bcrypt": "^5.1.1",
@@ -38,16 +36,18 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
-    "react-hook-form": "^7.47.0",
+    "react-hook-form": "^7.48.2",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
     "react-spinners": "^0.13.8",
     "stripe": "^14.3.0",
-    "tailwindcss": "3.3.5",
-    "typescript": "5.2.2"
+    "tailwindcss": "3.3.5"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.5",
-    "prisma": "^5.5.2"
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "prisma": "^5.5.2",
+    "typescript": "^5.2.2"
   }
 }
