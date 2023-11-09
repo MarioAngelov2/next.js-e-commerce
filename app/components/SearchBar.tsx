@@ -2,10 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import queryString from "query-string";
-import React from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import React, { useState } from "react";
+import { FieldValues, SubmitHandler, set, useForm } from "react-hook-form";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const SearchBar = () => {
+    const [openInput, setOpenInput] = useState<boolean>(false);
     const router = useRouter();
 
     const {
@@ -34,14 +36,18 @@ const SearchBar = () => {
         reset();
     };
 
+    const handleSearchInput = () => {
+        setOpenInput((prev) => !prev);
+    };
+
     return (
-        <div className="hidden md:flex items-center gap-2">
+        <div className="flex flex-row items-center gap-2">
             <input
                 {...register("searchTerm")}
                 autoComplete="off"
                 type="text"
                 placeholder="Explore products"
-                className="p-2 border rounded-md w-80 outline-none 
+                className="p-2 border rounded-md md:w-80 outline-none 
                 hover:shadow-md focus:shadow-md shadow-gray-100 transition 
                 duration-200 ease-in-out"
             />
