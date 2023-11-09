@@ -21,19 +21,11 @@ The admin can manage the products, delivery status and payment status. The payme
 - Payment Status
 - Purchase History
 
-## Features
-
-User authentication using JWT for secure access.
-Full CRUD operations for property listings.
-Booking system with date validation and conflict resolution.
-Responsive design for both desktop and mobile devices.
-
 ## Installation
 
 `Clone repo`
 
-- Server Dev Mode `cd server` `npm i` `npm run start-dev`
-- Client `cd client` `npm i` `npm run dev`
+  - `npm i` `npm run dev`
 
 ## Technology Stack
 
