@@ -43,8 +43,6 @@ The admin can manage the products, delivery status and payment status. The payme
 - Moment
 - Axios
 
-## Screenshots 
-
-
+## Video example
 https://github.com/MarioAngelov2/next.js-e-commerce/assets/107209439/1e1c684b-ebee-4268-a388-ebb3c471513d
 
