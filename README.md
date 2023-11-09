@@ -7,7 +7,7 @@ Welcome to E-Shop documentation. This document provides an overview of the app's
 ## Introduction
 
 Welcome to the E-Shop App documentation. This app is built using the Next.js and provides a platform for users shop various tech products. Every user can add to their cart products, make a payment method and track their order status. 
-The admin can manage the products, delivery status and payment status. The payments are done vie Stripe.
+The admin can manage the products, delivery status and payment status. The payments are done via Stripe.
 
 ## Key Frames
 
