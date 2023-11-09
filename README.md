@@ -30,6 +30,7 @@ The admin can manage the products, delivery status and payment status. The payme
 ## Technology Stack
 
 - Next.js 14
+- TypeSrcipt
 - MongoDB
 - Tailwind CSS
 - Prisma
