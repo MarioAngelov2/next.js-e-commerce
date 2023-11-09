@@ -27,6 +27,10 @@ The admin can manage the products, delivery status and payment status. The payme
 
   - `npm i` `npm run dev`
 
+## Admin credentials
+- email: pesho@abv.bg 
+- password: 123
+
 ## Technology Stack
 
 - Next.js 14
