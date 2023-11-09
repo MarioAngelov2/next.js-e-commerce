@@ -44,16 +44,3 @@ The admin can manage the products, delivery status and payment status. The payme
 - Axios
 
 ## Screenshots 
-
-<!-- <img src="public/../client/public/desktop1.png">
-<img src="public/../client/public/desktop2.png">
-<img src="public/../client/public/desktop3.png">
-<img src="public/../client/public/desktop4.png">
-<img src="public/../client/public/desktop5.png">
-<img src="public/../client/public/desktop6.png">
-<img width="400" src="public/../client/public/mobile%20(5).png">
-<img width="400" src="public/../client/public/mobile%20(6).png">
-<img width="400" src="public/../client/public/mobile%20(7).png">
-<img width="400" src="public/../client/public/mobile%20(8).png">
-<img width="400" src="public/../client/public/mobile%20(9).png">
-<img width="400" src="public/../client/public/mobile%20(10).png"> -->
